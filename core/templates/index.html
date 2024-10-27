@@ -1,0 +1,69 @@
+{% extends './base.html' %}
+
+
+{% block content %}
+
+<section>
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 z-10 relative">
+        <h1
+            class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+            <span class="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500">
+                Shorten Your Loooong Links
+            </span>
+        </h1>
+
+
+        <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 lg:px-48 dark:text-gray-200 w-2/3 mx-auto">
+            miniUrl is an
+            efficient and easy-to-use URL shortening service that streamlines your online experience.</p>
+        <form action="{% url 'shorten' %}" method="post" class="w-full max-w-md mx-auto">
+            {% csrf_token %}
+            <label for="url" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">shorten link</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 rtl:inset-x-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 19 19">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11.013 7.962a3.519 3.519 0 0 0-4.975 0l-3.554 3.554a3.518 3.518 0 0 0 4.975 4.975l.461-.46m-.461-4.515a3.518 3.518 0 0 0 4.975 0l3.553-3.554a3.518 3.518 0 0 0-4.974-4.975L10.3 3.7" />
+                    </svg>
+                </div>
+                <input type="text" id="url" name="url"
+                    class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Enter the link here..." required>
+                <button type="submit"
+                    class="text-white absolute end-2 bottom-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Shorten
+                    now</button>
+            </div>
+        </form>
+
+        <div class="mt-4">
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" checked>
+                <div
+                    class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                </div>
+                <span class="ms-3 text-sm font-medium text-slate-100">Auto paste from clipboard</span>
+            </label>
+
+            <p class="text-gray-200/40">You can create <span class="font-bold text-pink-600">{{attempts}}</span> more
+                links.
+                Register Now to enjoy Unlimited usage
+                question-circle</p>
+        </div>
+    </div>
+
+
+
+    {% include 'includes/table.html' %}
+
+
+</section>
+
+{% if not request.user.is_authenticated %}
+<div
+    class="bg-gradient-to-t from-gray-500/40 to-transparent text-center text-gray-200 h-[30vh] py-5 fixed bottom-0 left-0 w-full flex items-center justify-center">
+    <p><a href="" class="text-blue-500 hover:underline">Register Now</a> to enjoy Unlimited History</p>
+</div>
+{% endif %}
+
+{% endblock %}

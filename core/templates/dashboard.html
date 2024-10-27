@@ -1,0 +1,35 @@
+{% extends './base.html' %}
+
+
+{% block content %}
+
+<section>
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-5 z-10 relative">
+
+        <div class="mt-4">
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" value="" class="sr-only peer" checked>
+                <div
+                    class="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+                </div>
+                <span class="ms-3 text-sm font-medium text-slate-100">Auto paste from clipboard</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="bg-[#151A24]/20 min-h-screen">
+
+        <div class="py-4 bg-[#181E29] flex justify-center gap-3 items-center mb-5">
+            tabs
+        </div>
+
+        <div class="max-w-screen-xl mx-auto">
+            <h3 class="text-2xl text-white font-bold mb-5">History ({{links.count}})</h3>
+        </div>
+        {% include 'includes/table.html' %}
+    </div>
+
+</section>
+
+
+{% endblock %}

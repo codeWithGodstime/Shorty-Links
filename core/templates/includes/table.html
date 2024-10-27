@@ -1,0 +1,79 @@
+<div class="max-w-screen-xl mx-auto overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-400">
+        <thead class="text-xs text-gray-300 uppercase bg-slate-900/90">
+            <tr>
+                <th scope="col" class="px-6 py-5">
+                    Short link
+                </th>
+                <th scope="col" class="px-6 py-5">
+                    Orginal link
+                </th>
+
+                <th scope="col" class="px-6 py-5">
+                    Clicks
+                </th>
+                <th scope="col" class="px-6 py-5">
+                    Status
+                </th>
+                <th scope="col" class="px-6 py-5">
+                    Date
+                </th>
+
+                {% if request.user.is_authenticated %}
+                <th scope="col" class="px-6 py-5">
+                    Action
+                </th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for link in links %}
+            <tr class="bg-gray-800/40">
+                <td scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="flex items-center gap-3">
+                        <span>{{request.get_host}}/{{link.unique_code}}</span>
+
+                        <button class="btn bg-blue-600/50 hover:bg-blue-600/20 rounded-full p-2" onclick="copyToClipboard(this)">
+                            <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M2 5a1 1 0 0 0-1 1v12a.969.969 0 0 0 .933 1h8.1a1 1 0 0 0 1-1.033M10 1v4a1 1 0 0 1-1 1H5m10-4v12a.97.97 0 0 1-.933 1H5.933A.97.97 0 0 1 5 14V5.828a2 2 0 0 1 .586-1.414l2.828-2.828A2 2 0 0 1 9.828 1h4.239A.97.97 0 0 1 15 2Z" />
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+                <td class="px-6 py-4">
+                    {{link.original_link}}
+                </td>
+                <td class="px-6 py-4">
+                    {{link.clicks}}
+                </td>
+                <td class="px-6 py-4">
+                    {{link.status}}
+                </td>
+                <td class="px-6 py-4">
+                    {{link.date_added}}
+                </td>
+                {% if request.user.is_authenticated %}
+                    <td class="px-6 py-4">
+                        <div class="flex gap-3">
+                            <span>
+                                <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="m13.835 7.578-.005.007-7.137 7.137 2.139 2.138 7.143-7.142-2.14-2.14Zm-10.696 3.59 2.139 2.14 7.138-7.137.007-.005-2.141-2.141-7.143 7.143Zm1.433 4.261L2 12.852.051 18.684a1 1 0 0 0 1.265 1.264L7.147 18l-2.575-2.571Zm14.249-14.25a4.03 4.03 0 0 0-5.693 0L11.7 2.611 17.389 8.3l1.432-1.432a4.029 4.029 0 0 0 0-5.689Z"/>
+                                  </svg>
+                            </span>
+
+                            <span>
+                                <svg class="w-4 h-4 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h16M7 8v8m4-8v8M7 1h4a1 1 0 0 1 1 1v3H6V2a1 1 0 0 1 1-1ZM3 5h12v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5Z"/>
+                                  </svg>
+                            </span>
+                        </div>
+                    </td>
+                    {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
